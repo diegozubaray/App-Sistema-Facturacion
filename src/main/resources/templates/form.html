@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-dark text-white">
+			<div class=" card-header" th:text="${titulo}"></div>
+			<div class=" card-body">
+				<form th:action="@{/form}" th:object="${cliente}" method="post" enctype="multipart/form-data">
+
+					<div class="form-group">
+						<label for="nombre" th:text="#{text.cliente.nombre}" ></label> <input type="text"
+							th:field="*{nombre}" class="form-control"
+							th:errorclass="'alert-danger'" id="nombre" th:placeholder="#{text.cliente.nombre}">
+
+						<small class="form-text text-danger "
+							th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+					</div>
+					<div class="form-group">
+						<label for="apellido" th:text="#{text.cliente.apellido}" ></label> <input type="text"
+							th:field="*{apellido}" class="form-control"
+							th:errorclass="'alert-danger'" id="apellido"
+							th:placeholder="#{text.cliente.apellido}" required="required"> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" ></small>
+					</div>
+					<div class="form-group">
+						<label for="email"  th:text="#{text.cliente.email}"></label> <input type="email"
+							th:field="*{email}" class="form-control"
+							th:errorclass="'alert-danger'" id="email" th:placeholder="#{text.cliente.email}">
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+					</div>
+					<div class="form-group">
+						<label for="fecha" th:text="#{text.cliente.createAt}"></label> <input type="date"
+							th:field="*{createAt}" class="form-control"
+							th:errorclass="'alert-danger'" id="fecha" th:placeholder="#{text.cliente.createAt}">
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
+					</div>
+					
+					<div class="form-group">
+						<label for="file" th:text="#{text.cliente.foto}">Foto</label> 
+						<input type="file" name="file"class="form-control" id="file" >
+						
+					</div>		
+																
+					<div class=form-group>  
+							<input type="submit" th:value="#{text.cliente.crear}"class="btn btn-outline-info mt-3" />
+						</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>
